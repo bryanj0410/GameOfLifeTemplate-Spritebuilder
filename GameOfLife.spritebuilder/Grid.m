@@ -92,7 +92,7 @@ static const int GRID_COLUMNS = 10;
 - (void)evolveStep
 {
     //update each Creature's neighbor count
-    [self countNeighbors];
+    [self createNeighbors];
     
     //update each Creature's state
     [self updateCreatures];
