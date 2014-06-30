@@ -13,13 +13,11 @@
 static const int GRID_ROWS = 8;
 static const int GRID_COLUMNS = 10;
 
-@implementation Grid
-{
+@implementation Grid {
     NSMutableArray *_gridArray;
     float _cellWidth;
     float _cellHeight;
 }
-
 
 - (void)onEnter
 {
@@ -30,7 +28,6 @@ static const int GRID_COLUMNS = 10;
     // accept touches on the grid
     self.userInteractionEnabled = YES;
 }
-
 
 - (void)setupGrid
 {
@@ -66,7 +63,6 @@ static const int GRID_COLUMNS = 10;
     }
 }
 
-
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     //get the x,y coordinates of the touch
@@ -79,16 +75,14 @@ static const int GRID_COLUMNS = 10;
     creature.isAlive = !creature.isAlive;
 }
 
-
 - (Creature *)creatureForTouchPosition:(CGPoint)touchPosition
 {
     //get the row and column that was touched, return the Creature inside the corresponding cell
-    int row = touchPosition.y / _cellHeight;
-    int column = touchPosition.x / _cellWidth;
+    int row = touchPosition.y/_cellHeight;
+    int col = touchPosition.x/_cellWidth;
     
-    return _gridArray[row][column];
+    return _gridArray[row][col];
 }
-
 
 - (void)evolveStep
 {
@@ -101,7 +95,6 @@ static const int GRID_COLUMNS = 10;
     //update the generation so the label's text will display the correct generation
     _generation++;
 }
-
 
 - (void)countNeighbors
 {
@@ -145,18 +138,6 @@ static const int GRID_COLUMNS = 10;
     }
 }
 
-
-- (BOOL)isIndexValidForX:(int)x andY:(int)y
-{
-    BOOL isIndexValid = YES;
-    if(x < 0 || y < 0 || x >= GRID_ROWS || y >= GRID_COLUMNS)
-    {
-        isIndexValid = NO;
-    }
-    return isIndexValid;
-}
-
-
 - (void)updateCreatures
 {
     int numAlive = 0;
@@ -166,22 +147,30 @@ static const int GRID_COLUMNS = 10;
         for (int j = 0; j < [_gridArray[i] count]; j++)
         {
             Creature *currentCreature = _gridArray[i][j];
-            
-            if (currentCreature.livingNeighbors == 3)
-            {
-                currentCreature.isAlive = TRUE;
+            if (currentCreature.livingNeighbors == 3) {
+                currentCreature.isAlive = true;
             }
-            else if (currentCreature.livingNeighbors <= 2 || currentCreature.livingNeighbors == 4)
+            else if (currentCreature.livingNeighbors <= 1 || currentCreature.livingNeighbors >= 4)
             {
-                currentCreature.isAlive = FALSE;
+                currentCreature.isAlive = false;
             }
-            if (currentCreature.isAlive)
-            {
+            if (currentCreature.isAlive) {
                 numAlive++;
             }
+            
         }
     }
     _totalAlive = numAlive;
+}
+
+- (BOOL)isIndexValidForX:(int)x andY:(int)y
+{
+    BOOL isIndexValid = YES;
+    if(x < 0 || y < 0 || x >= GRID_ROWS || y >= GRID_COLUMNS)
+    {
+        isIndexValid = NO;
+    }
+    return isIndexValid;
 }
 
 @end
