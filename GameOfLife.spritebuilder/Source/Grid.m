@@ -1,11 +1,3 @@
-//
-//  Grid.m
-//  GameOfLife
-//
-//  Created by Bryan Johnson on 7/1/14.
-//  Copyright (c) 2014 Apportable. All rights reserved.
-//
-
 #import "Grid.h"
 #import "Creature.h"
 
@@ -71,17 +63,17 @@ static const int GRID_COLUMNS = 10;
     //get the Creature at that location
     Creature *creature = [self creatureForTouchPosition:touchLocation];
     
-    //invert it's state - kill it if it's alive, bring it to life if it's dead
+    //invert it's state - kill it if it's alive, bring it to life if it's dead.
     creature.isAlive = !creature.isAlive;
 }
 
 - (Creature *)creatureForTouchPosition:(CGPoint)touchPosition
 {
     //get the row and column that was touched, return the Creature inside the corresponding cell
-    int row = touchPosition.y / _cellHeight;
-    int column = touchPosition.x / _cellWidth;
+    int row = touchPosition.y/_cellHeight;
+    int col = touchPosition.x/_cellWidth;
     
-    return _gridArray[row][column];
+    return _gridArray[row][col];
 }
 
 - (void)evolveStep

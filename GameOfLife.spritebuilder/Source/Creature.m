@@ -2,7 +2,7 @@
 //  Creature.m
 //  GameOfLife
 //
-//  Created by Bryan Johnson on 7/1/14.
+//  Created by Bryan Johnson on 6/27/14.
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
@@ -21,7 +21,7 @@
     return self;
 }
 
-- (void)setIsAlive:(BOOL)newState {
+- (void)setIsAlive:(BOOL)newState{
     //when you create an @property as we did in the .h, an instance variable with a leading underscore is automatically created for you
     _isAlive = newState;
     
